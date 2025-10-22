@@ -179,11 +179,13 @@ void apply_title_boost(Sentence *sentences, int n_sentences, const char *title) 
 // ========================== Position Bias ==========================
 void apply_position_bias(Sentence *sentences, int n_sentences) {
     for (int i = 0; i < n_sentences; i++) {
-        double pos_factor = 1.0 / (1.0 + sentences[i].index);
-        sentences[i].score = 0.8 * sentences[i].score + 0.2 * pos_factor;
+        double pos_factor = 1.0 / (1.0 + sentences[i].index); 
+        
+        // Multiply the TF-IDF score by the position factor.
+        // This correctly scales the score, heavily favoring the start.
+        sentences[i].score = sentences[i].score * pos_factor; // <-- FIXED LINE
     }
 }
-
 // ========================== Comparator ==========================
 int cmp_score(const void *a, const void *b) {
     double diff = ((Sentence*)b)->score - ((Sentence*)a)->score;
