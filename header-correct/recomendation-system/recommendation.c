@@ -1,5 +1,4 @@
-/* 
-    Content based filtering - i get what i like
+/* Content based filtering - i get what i like
         Suppose:
             For a movie has N features:
                 Action-(1,0)
